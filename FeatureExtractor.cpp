@@ -23,6 +23,7 @@ void FeatureExtractor::setFeature(const string &descriptor) {
     else if (descriptor=="brisk") detector=cv::BRISK::create();
     else if (descriptor=="akaze") detector=cv::AKAZE::create();
     else if(descriptor=="surf" )  detector=cv::xfeatures2d::SURF::create(500, 4, 2, true);
+    else if(descriptor=="sift" )  detector=cv::xfeatures2d::SIFT::create(1000);
     else throw std::runtime_error("Invalid descriptor");
     assert(!descriptor.empty());
 }

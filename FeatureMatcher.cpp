@@ -258,9 +258,9 @@ cv::Mat FeatureMatcher::match(cv::Mat& image2, // input scene image
     // 3. Remove matches for which NN ratio is
     // > than threshold
     // clean object image -> scene image matches
-    int removed= ratioTest(matches1);
+    ratioTest(matches1);
     // clean scene image -> object image matches
-    removed= ratioTest(matches2);
+    ratioTest(matches2);
     // 4. Remove non-symmetrical matches
     std::vector<cv::DMatch> symMatches;
     symmetryTest(matches1,matches2,symMatches);
@@ -281,6 +281,7 @@ cv::Mat FeatureMatcher::match(std::vector<cv::KeyPoint>& keypoints1, // input co
                               cv::Mat& descriptors2, // input computed object descriptors
                               std::vector<cv::DMatch>& matches) // output matches
 {
+    matches.clear();
     std::vector<cv::Point2f> points1; // output object keypoints (Point2f)
     std::vector<cv::Point2f> points2;
     std::vector<std::vector<cv::DMatch> > matches1;
@@ -304,6 +305,7 @@ cv::Mat FeatureMatcher::match(std::vector<cv::KeyPoint>& keypoints1, // input co
     // 4. Remove non-symmetrical matches
     std::vector<cv::DMatch> symMatches;
     symmetryTest(matches1,matches2,symMatches);
+
     // 5. Validate matches using RANSAC
     cv::Mat fundamental= ransacTest(symMatches,
                                     keypoints1,
