@@ -20,17 +20,16 @@ class FeatureTracker {
     vector<KeyPoint> curtKps;
     Mat curtDescs;
 
-    vector<Mat> historicalFrame;
-    vector<vector<KeyPoint> > historicalKps;
-    vector<Mat> historicalDescs;
+    Mat lastFrame;
+    vector<KeyPoint> lastKps;
+    Mat lastDescs;
 
     Mat initFrame;
     vector<KeyPoint> initKps;
     Mat initDescs;
 
-    vector<vector<DMatch> > matchesInitAndHistory;
-    vector<vector<DMatch> > matchesHistoryAndCurt;
-    vector<DMatch> matchesInitAndCurt;
+    vector<DMatch> matches4Init;
+    vector<DMatch> matches4CurtFrame;
 
 public:
     explicit FeatureTracker(string vName);
